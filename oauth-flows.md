@@ -1,9 +1,5 @@
 # SSO del Producto — Flujos, Seguridad y Gobierno
 
-## docs/oauth-flows.md
-
----
-
 ## 1. Objetivo
 
 Ofrecer Inicio de Sesión Único (SSO) para todas las aplicaciones de la suite, centralizando autenticación y consentimiento en un Proveedor de Identidad (IdP) y delegando autorización mediante OAuth 2.0 – Authorization Code + PKCE con permisos granulares por scopes.
