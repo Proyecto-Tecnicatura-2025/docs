@@ -114,7 +114,7 @@ Revocación del cliente bloquea nuevos logins; tokens vigentes expiran normalmen
 
 ---
 
-## 6. Integración con Active Directory (Opción A)
+## 6. Integración con Active Directory
 
 ### 6.1 Estrategia
 
