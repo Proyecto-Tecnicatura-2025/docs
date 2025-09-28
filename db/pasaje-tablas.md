@@ -8,7 +8,7 @@ Publica(***id_juego***, ***id_clave***, fecha)
 
 Clave(**id_clave**, <u>valor</u>, precio, fecha)
 
-Compra**id_compra**, *id_clave*, *id_cliente*, *id_transaccion*, fecha, monto, estado)
+Compra(**id_compra**, *id_clave*, *id_cliente*, *id_transaccion*, fecha, monto, estado)
 
 Reventa(***id_compra***, ***id_cliente***, **fecha_reventa**, precio)
 
