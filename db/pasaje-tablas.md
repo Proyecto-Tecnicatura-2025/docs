@@ -12,9 +12,13 @@ Compra(**id_compra**, *id_clave*, *id_cliente*, *id_transaccion*, fecha, monto, 
 
 Reventa(***id_compra***, ***id_cliente***, **fecha_reventa**, precio)
 
-Reseña(***id_cliente***, ***id_juego***, fecha, cuerpo)
+Resena(**id_resena**, *id_cliente*, *id_juego*, fecha, cuerpo)
 
-Reporta\_res(**id_reporte**, motivo)
+Reporta\_res(***id_cliente***, ***id_resena***, fecha)
+
+Reporta\_pub(***id_juego***, ***id_cliente***, motivo, detalle, fecha)
+
+Reporta\_com(***id_compra***, ***id_cliente***, motivo, detalle, fecha)
 
 Favorito(***id_cliente***, ***id_juego***)
 
@@ -34,4 +38,6 @@ Asociada(***id_oferta***, ***id_publicidad***)
 
 Referencia(***id_juego***, ***id_publicidad***)
 
-Publicidad(**id_publicidad**, nombre, redireccionamiento, url\_media, tipo\_media fecha\_inicio, fecha\_fin, activa)
+Publicidad(**id_publicidad**, nombre, redireccionamiento, url\_media, fecha\_inicio, fecha\_fin, activa)
+
+Media(**id_media**, ***id_juego***, url, ubicacion, orden)
