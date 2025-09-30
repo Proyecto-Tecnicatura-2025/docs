@@ -27,3 +27,5 @@ GRANT INSERT, UPDATE, DELETE ON Asociada TO 'publicador'@'localhost';
 GRANT INSERT, UPDATE, DELETE ON Referencia TO 'publicador'@'localhost';
 GRANT INSERT, UPDATE, DELETE ON Publicidad TO 'publicador'@'localhost';
 GRANT INSERT, UPDATE, DELETE ON Media TO 'publicador'@'localhost';
+
+FLUSH PRIVILEGES;
