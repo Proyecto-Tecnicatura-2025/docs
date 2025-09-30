@@ -1,4 +1,4 @@
-Cliente(**id_cliente**, <u>*id_wallet*</u>, nombre, correo, es\_miembro, nick)
+Cliente(**id_cliente**, <u>*id_wallet*</u>, correo, es\_miembro, nick)
 
 Publicador(**id_publicador**, <u>*id_wallet*</u>, nombre, correo, aprobado, reputación)
 
@@ -6,7 +6,7 @@ Juego(**id_juego**, *id_publicador*, genero, idioma, region, plataforma, titulo,
 
 Publica(***id_juego***, ***id_clave***, fecha)
 
-Clave(**id_clave**, <u>valor</u>, precio, fecha)
+Clave(**id_clave**, <u>valor</u>, precio)
 
 Compra(**id_compra**, *id_clave*, *id_cliente*, *id_transaccion*, fecha, monto, estado)
 
