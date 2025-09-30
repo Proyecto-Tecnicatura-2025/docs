@@ -2,7 +2,7 @@ Cliente(**id_cliente**, <u>*id_wallet*</u>, correo, es\_miembro, nick)
 
 Publicador(**id_publicador**, <u>*id_wallet*</u>, nombre, correo, aprobado, reputación)
 
-Juego(**id_juego**, *id_publicador*, genero, idioma, region, plataforma, titulo, descripción, distribuidor, requisitos\_sistema, caractersísticas, fecha\_lanzamiento)
+Juego(**id_juego**, *id_publicador*, genero, idioma, region, plataforma, titulo, descripción, distribuidor, requisitos\_sistema, caractersisticas, fecha\_lanzamiento)
 
 Publica(***id_juego***, ***id_clave***, fecha)
 
