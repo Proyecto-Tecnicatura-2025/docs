@@ -1,5 +1,12 @@
+USE keymasters;
+
+CREATE TABLE Wallet (
+    id_wallet INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    monto_total DECIMAL(10,2) NOT NULL DEFAULT 0.00
+);
+
 CREATE TABLE Cliente (
-    id_cliente INT UNSIGNED PRIMARY KEY,
+    id_cliente INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_wallet INT UNSIGNED,
     correo VARCHAR(150) NOT NULL,
     es_miembro BOOLEAN NOT NULL DEFAULT FALSE,
@@ -8,7 +15,7 @@ CREATE TABLE Cliente (
 );
 
 CREATE TABLE Publicador (
-    id_publicador INT UNSIGNED PRIMARY KEY,
+    id_publicador INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_wallet INT UNSIGNED,
     nombre VARCHAR(100) NOT NULL,
     correo VARCHAR(150) NOT NULL,
@@ -18,7 +25,7 @@ CREATE TABLE Publicador (
 );
 
 CREATE TABLE Juego (
-    id_juego INT UNSIGNED PRIMARY KEY,
+    id_juego INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_publicador INT UNSIGNED NOT NULL,
     genero VARCHAR(50) NOT NULL,
     idioma VARCHAR(50) NOT NULL,
@@ -33,6 +40,12 @@ CREATE TABLE Juego (
     FOREIGN KEY (id_publicador) REFERENCES Publicador(id_publicador)
 );
 
+CREATE TABLE Clave (
+    id_clave INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    valor VARCHAR(100) UNIQUE NOT NULL,
+    precio DECIMAL(10,2) NOT NULL
+);
+
 CREATE TABLE Publica (
     id_juego INT UNSIGNED,
     id_clave INT UNSIGNED,
@@ -42,14 +55,19 @@ CREATE TABLE Publica (
     FOREIGN KEY (id_clave) REFERENCES Clave(id_clave)
 );
 
-CREATE TABLE Clave (
-    id_clave INT UNSIGNED PRIMARY KEY,
-    valor VARCHAR(100) UNIQUE NOT NULL,
-    precio DECIMAL(10,2) NOT NULL
+CREATE TABLE Transaccion (
+    id_transaccion INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_wallet_origen INT UNSIGNED,
+    id_wallet_destino INT UNSIGNED,
+    fecha DATETIME NOT NULL,
+    monto DECIMAL(10,2) NOT NULL,
+    referencia VARCHAR(255),
+    FOREIGN KEY (id_wallet_origen) REFERENCES Wallet(id_wallet),
+    FOREIGN KEY (id_wallet_destino) REFERENCES Wallet(id_wallet)
 );
 
 CREATE TABLE Compra (
-    id_compra INT UNSIGNED PRIMARY KEY,
+    id_compra INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_clave INT UNSIGNED NOT NULL,
     id_cliente INT UNSIGNED NOT NULL,
     id_transaccion INT UNSIGNED NOT NULL,
@@ -76,7 +94,7 @@ CREATE TABLE Reventa (
 );
 
 CREATE TABLE Resena (
-    id_resena INT UNSIGNED PRIMARY KEY,
+    id_resena INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_cliente INT UNSIGNED NOT NULL,
     id_juego INT UNSIGNED NOT NULL,
     fecha DATETIME NOT NULL,
@@ -144,24 +162,8 @@ CREATE TABLE Upovote (
     FOREIGN KEY (id_juego) REFERENCES Juego(id_juego)
 );
 
-CREATE TABLE Wallet (
-    id_wallet INT UNSIGNED PRIMARY KEY,
-    monto_total DECIMAL(10,2) NOT NULL DEFAULT 0.00
-);
-
-CREATE TABLE Transaccion (
-    id_transaccion INT UNSIGNED PRIMARY KEY,
-    id_wallet_origen INT UNSIGNED,
-    id_wallet_destino INT UNSIGNED,
-    fecha DATETIME NOT NULL,
-    monto DECIMAL(10,2) NOT NULL,
-    referencia VARCHAR(255),
-    FOREIGN KEY (id_wallet_origen) REFERENCES Wallet(id_wallet),
-    FOREIGN KEY (id_wallet_destino) REFERENCES Wallet(id_wallet)
-);
-
 CREATE TABLE Movimiento (
-    id_movimiento INT UNSIGNED PRIMARY KEY,
+    id_movimiento INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_cliente INT UNSIGNED NOT NULL,
     id_wallet INT UNSIGNED NOT NULL,
     positivo_negativo BOOLEAN NOT NULL,
@@ -173,7 +175,7 @@ CREATE TABLE Movimiento (
 );
 
 CREATE TABLE Oferta (
-    id_oferta INT UNSIGNED PRIMARY KEY,
+    id_oferta INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(100) NOT NULL,
     tipo ENUM(
         'porcentual',
@@ -194,12 +196,14 @@ CREATE TABLE Genera (
     FOREIGN KEY (id_oferta) REFERENCES Oferta(id_oferta)
 );
 
-CREATE TABLE Asociada (
-    id_oferta INT UNSIGNED,
-    id_publicidad INT UNSIGNED,
-    PRIMARY KEY (id_oferta, id_publicidad),
-    FOREIGN KEY (id_oferta) REFERENCES Oferta(id_oferta),
-    FOREIGN KEY (id_publicidad) REFERENCES Publicidad(id_publicidad)
+CREATE TABLE Publicidad (
+    id_publicidad INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    redireccionamiento VARCHAR(255) NOT NULL,
+    url_media VARCHAR(255),
+    fecha_inicio DATE NOT NULL,
+    fecha_fin DATE NOT NULL,
+    activa BOOLEAN NOT NULL DEFAULT TRUE
 );
 
 CREATE TABLE Referencia (
@@ -210,18 +214,16 @@ CREATE TABLE Referencia (
     FOREIGN KEY (id_publicidad) REFERENCES Publicidad(id_publicidad)
 );
 
-CREATE TABLE Publicidad (
-    id_publicidad INT UNSIGNED PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    redireccionamiento VARCHAR(255) NOT NULL,
-    url_media VARCHAR(255),
-    fecha_inicio DATE NOT NULL,
-    fecha_fin DATE NOT NULL,
-    activa BOOLEAN NOT NULL DEFAULT TRUE
+CREATE TABLE Asociada (
+    id_oferta INT UNSIGNED,
+    id_publicidad INT UNSIGNED,
+    PRIMARY KEY (id_oferta, id_publicidad),
+    FOREIGN KEY (id_oferta) REFERENCES Oferta(id_oferta),
+    FOREIGN KEY (id_publicidad) REFERENCES Publicidad(id_publicidad)
 );
 
 CREATE TABLE Media (
-    id_media INT UNSIGNED PRIMARY KEY,
+    id_media INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_juego INT UNSIGNED NOT NULL,
     url VARCHAR(255) NOT NULL,
     ubicacion VARCHAR(50) NOT NULL,
