@@ -4,6 +4,10 @@ services:
     container_name: keymasters-db
     restart: unless-stopped
     env_file: .env.db
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
+      timeout: 20s
+      retries: 10
     environment:
       MYSQL_DATABASE: keymasters
     ports:
@@ -13,3 +17,19 @@ services:
       - ./scripts-sql:/docker-entrypoint-initdb.d
     command: 
       - --init-file=/docker-entrypoint-initdb.d/00-init.sql
+      - --default-authentication-plugin=mysql_native_password
+  mysql-configurator:
+    build: 
+      context: ./docker/mysql-configurator
+      dockerfile: Containerfile
+    container_name: keymasters-db-configurator
+    depends_on:
+      mysql:
+        condition: service_healthy
+    env_file: 
+      - .env.db
+      - .env.db-configurator
+    environment:
+      MYSQL_DATABASE: keymasters
+      MYSQL_HOST: mysql
+

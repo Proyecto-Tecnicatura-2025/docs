@@ -1,0 +1,9 @@
+FROM alpine
+
+RUN apk update && \
+    apk add bash mariadb-client && \
+    apk cache clean
+
+COPY start.sh ./
+
+CMD bash start.sh
