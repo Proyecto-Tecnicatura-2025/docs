@@ -2,7 +2,7 @@ Cliente(**id_cliente**, <u>*id_wallet*</u>, correo, es\_miembro, nick)
 
 Publicador(**id_publicador**, <u>*id_wallet*</u>, nombre, correo, aprobado, reputación)
 
-Juego(**id_juego**, *id_publicador*, genero, idioma, region, plataforma, titulo, descripción, distribuidor, requisitos\_sistema, caractersisticas, fecha\_lanzamiento)
+Juego(**id_juego**, *id_publicador*, genero, idioma, region, plataforma, titulo, descripcion, distribuidor, requisitos\_sistema, caractersisticas, fecha\_lanzamiento)
 
 Publica(***id_juego***, ***id_clave***, fecha)
 
@@ -14,11 +14,13 @@ Reventa(***id_compra***, ***id_cliente***, **fecha_reventa**, precio)
 
 Resena(**id_resena**, *id_cliente*, *id_juego*, fecha, cuerpo)
 
-Reporta\_res(***id_cliente***, ***id_resena***, fecha)
+Motivo\_reporte(**id_motivo**, descripcion, valido\_en)
 
-Reporta\_pub(***id_juego***, ***id_cliente***, motivo, detalle, fecha)
+Reporta\_res(***id_cliente***, ***id_resena***, *id_motivo* fecha)
 
-Reporta\_com(***id_compra***, ***id_cliente***, motivo, detalle, fecha)
+Reporta\_pub(***id_juego***, ***id_cliente***, *id_motivo*, detalle, fecha)
+
+Reporta\_com(***id_compra***, ***id_cliente***, *id_motivo*, detalle, fecha)
 
 Favorito(***id_cliente***, ***id_juego***)
 
